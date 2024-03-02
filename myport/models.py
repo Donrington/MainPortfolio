@@ -1,8 +1,10 @@
 from flask import Flask
-from datetime import datetime,time
+from datetime import datetime, time
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import TEXT
+
 db = SQLAlchemy()
+
 
 class BlogPost(db.Model):
     __tablename__ = 'blog_posts'
@@ -13,6 +15,7 @@ class BlogPost(db.Model):
     post_date = db.Column(db.Date, nullable=False)
     read_time = db.Column(db.String(50), nullable=True)
     author = db.Column(db.String(100), nullable=False)
+
 
 class Comment(db.Model):
     __tablename__ = 'comments'
