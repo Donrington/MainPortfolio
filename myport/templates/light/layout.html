@@ -188,5 +188,22 @@
   gtag('config', 'UA-157808202-1');
 </script>
 
+<script>
+  function showThankYouPopup() {
+      // Show the thank you popup
+      document.getElementById('thankYouPopup').style.display = 'flex';
+
+      // Hide the popup and reload the page after 3 seconds (adjust the delay as needed)
+      setTimeout(function () {
+          document.getElementById('thankYouPopup').style.display = 'none';
+          location.reload();
+      }, 3000); // 3000 milliseconds = 3 seconds
+  }
+
+  function closeThankYouPopup() {
+      document.getElementById('thankYouPopup').style.display = 'none';
+  }
+</script>
+
   </body>
 </html>
