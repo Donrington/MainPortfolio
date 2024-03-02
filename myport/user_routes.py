@@ -2,15 +2,15 @@ import json, os
 from os.path import basename
 from sqlalchemy.orm.exc import NoResultFound
 from functools import wraps
-from werkzeug.security import generate_password_hash,check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 from flask_login import current_user, login_required
-from flask import * 
+from flask import *
 from flask_socketio import SocketIO, emit, join_room, leave_room
 from markupsafe import escape
-import re 
+import re
 from flask_wtf.csrf import CSRFProtect
-from myport import app,csrf,socketio
+from myport import app, csrf, socketio
 from myport.forms import *
 from flask_login import login_required
 from myport.models import db, BlogPost, Comment
@@ -21,30 +21,31 @@ from sqlalchemy import func
 from datetime import datetime
 
 
-
 @app.route("/", methods=['GET', 'POST'])
 def homepage():
     posts = BlogPost.query.all()
     return render_template('light/index.html', posts=posts)
 
 
-
-
 @app.route("/HeartfulConnect/", methods=['GET', 'POST'])
 def heartfulconnect():
     return render_template("light/portfolio-single-1.html", pagename='HeartfulConnect | Cybersage')
+
 
 @app.route("/Lagos/Afrobeat/", methods=["GET", "POST"])
 def afrobeat():
     return render_template("light/portfolio-single-2.html", pagename='Afrobeat | Cybersage')
 
+
 @app.route("/EStore/", methods=["GET", "POST"])
 def estore():
     return render_template("light/portfolio-single-3.html", pagename='EStore | Cybersage')
 
-@app.route("/Techhub/", methods=["GET","POST"])
+
+@app.route("/Techhub/", methods=["GET", "POST"])
 def techhub():
     return render_template("light/portfolio-single-4.html", pagename="TechHub | Cybersage")
+
 
 @app.route('/post/<int:post_id>', methods=['GET', 'POST'])
 def blog_single(post_id):
@@ -71,9 +72,11 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 def allowed_file(filename):
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/admin/', methods=['GET', 'POST'])
 def admin():
@@ -111,14 +114,16 @@ def calculate_read_time(content):
     read_time_minutes = max(1, number_of_words // words_per_minute)
     return f"{read_time_minutes} min read"
 
+
 from datetime import datetime
+
 
 @app.route('/submit_comment/<int:post_id>', methods=['POST', 'GET'])
 def submit_comment(post_id):
     # CSRF protection is already handled by Flask-WTF if set up correctly
     name = request.form.get('name')
     comment_text = request.form.get('comment')
-    
+
     # Create a new Comment object with the current date and time
     comment = Comment(
         post_id=post_id,
@@ -126,10 +131,10 @@ def submit_comment(post_id):
         comment=comment_text,
         comment_date=datetime.utcnow()  # Set the current date and time
     )
-    
+
     # Save the comment to the database
     db.session.add(comment)
     db.session.commit()
-    
+
     flash('Your comment has been posted.', 'success')
     return redirect(url_for('blog_single', post_id=post_id))  # Redirect to the blog post page
