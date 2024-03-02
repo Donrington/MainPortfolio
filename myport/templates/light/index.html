@@ -494,7 +494,7 @@
       <div class="row justify-content-between">
         
         <div class="col-md-6">
-          <form method="POST" class="form-outline-style-v1"  action="https://formsubmit.co/Carryoby@gmail.com">
+          <form method="POST" class="form-outline-style-v1"  action="https://formsubmit.co/Carryoby@gmail.com" role="form" class="php-email-form" onsubmit="showThankYouPopup()">
             <input type="hidden" name="_captcha" value="false">
             <div class="form-group row mb-0">
 
@@ -526,6 +526,14 @@
                 </div>
               </div>
           </form>
+
+          <div id="thankYouPopup" class="popup">
+            <div class="popup-content">
+                <span class="close" onclick="closeThankYouPopup()">&times;</span>
+                <h2>Thank You!</h2>
+                <p>Your message has been successfully submitted.</p>
+            </div>
+          </div>
       
 
         </div>
@@ -547,13 +555,7 @@
           </div>
         </div>
 
-        <div id="thankYouPopup" class="popup">
-          <div class="popup-content">
-              <span class="close" onclick="closeThankYouPopup()">&times;</span>
-              <h2>Thank You!</h2>
-              <p>Your message has been successfully submitted.</p>
-          </div>
-        </div>
+    
 
       </div>
     </div>
