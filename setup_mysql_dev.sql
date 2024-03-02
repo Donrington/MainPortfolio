@@ -1,8 +1,8 @@
 -- sql script
 
 
-CREATE DATABASE IF NOT EXISTS VoteBuddy;
-       CREATE USER IF NOT EXISTS 'vote_buddy'@'localhost' IDENTIFIED BY 'Votebuddy123$';
-              GRANT ALL PRIVILEGES ON VoteBuddy.* TO 'vote_buddy'@'localhost';
-                                      GRANT SELECT ON performance_schema.* TO 'vote_buddy'@'localhost';
+CREATE DATABASE IF NOT EXISTS MainPortfolio;
+       CREATE USER IF NOT EXISTS 'main_portfolio'@'localhost' IDENTIFIED BY 'Iamdonpablo25_';
+              GRANT ALL PRIVILEGES ON MainPortfolio.* TO 'main_portfolio'@'localhost';
+                                      GRANT SELECT ON performance_schema.* TO 'main_portfolio'@'localhost';
 FLUSH PRIVILEGES;
